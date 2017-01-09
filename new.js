@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var newApp = express();
-
+var mongoose = require('mongoose');
 var port = 4000;
 
 newApp.listen(4000);
@@ -18,6 +18,7 @@ newApp.use(bodyParser.urlencoded({
 newApp.get('/about', function (req, res) {
     res.render("pages/about");
 });
+
 newApp.get('/contact', function (req, res) {
     res.render("pages/contact");
 });
@@ -51,17 +52,3 @@ newApp.use('/', newRouter);
 
 
 
-/*newApp.use(express.static('public'));
-
-newRouter.get('/about', function (req, res) {
-  //  res.send("This is about page")
-//});
-newRouter.get('/contact', function (req, res) {
-    res.send("This is contact page")
-});
-
-newApp.use(newRouter);
-
-newApp.get('/', function (req, res) {
-    res.send("New port is running on 4000")
-});*/
