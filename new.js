@@ -8,6 +8,21 @@ newApp.listen(4000);
 
 newApp.set('view engine', 'ejs');
 
+mongoose.connect('mongodb://localhost/learning');
+
+var Schema = mongoose.Schema;
+
+// create a schema
+var userSchema = new Schema({
+    name: String,
+    contact : Number,
+    address :String
+});
+
+var User = mongoose.model('User', userSchema);
+
+
+
 newRouter = express.Router();
 
 newApp.use(bodyParser.json());
@@ -38,13 +53,22 @@ newApp.get('/', function (req, res) {
 });
 
 newApp.post('/sendData', function (req, res) {
-    var person = {
-        name: req.body.name,
-        contact: req.body.contact,
-        address: req.body.address
-    };
 
-    res.render('pages/dataReceive', person);
+
+    var chris = new User({
+        name: req.body.name,
+        contact : req.body.contact,
+        address :req.body.address,
+        email : 'abc@gmail.com'
+    });
+
+    chris.save(function(err) {
+        if (err) throw err;
+
+        console.log('User saved successfully!');
+    });
+
+    res.render('pages/dataReceive', chris);
 });
 //about page
 
