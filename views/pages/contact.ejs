@@ -10,14 +10,15 @@
 </header>
 <body>
 <section>
-    <form method="post" class="form" id="data-send">
+    <form action="/sendData" method="post" class="form" id="data-send">
         <label>Name:</label>
-        <input type="text" placeholder="name"><br><br>
+        <input type="text" placeholder="name" name="name"><br><br>
         <label>contact</label>
-        <input type="text" placeholder="contact No."><br><br>
+        <input type="text" placeholder="contact No." name="contact"><br><br>
         <label>Address</label>
-        <input type="text" placeholder="Address"><br><br>
-        <button type="reset">Reset</button>
+        <input type="text" placeholder="Address" name="address"><br><br>
+        <button type="reset">Reset</button><br><br>
+        <button type="submit" value="submit">Submit</button>
     </form>
 </section>
 </body>
@@ -28,4 +29,3 @@
 
 </body>
 </html>
->
