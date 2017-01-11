@@ -21,6 +21,15 @@ var userSchema = new Schema({
 
 var User = mongoose.model('User', userSchema);
 
+var employeeDetails = new Schema({
+    ID: Number,
+    name: String,
+    contact: Number,
+    department: String
+});
+
+var EmployeeData = mongoose.model('EmployeeData', employeeDetails);
+
 
 
 newRouter = express.Router();
