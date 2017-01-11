@@ -7,30 +7,33 @@ var port = 4000;
 newApp.listen(4000);
 
 newApp.set('view engine', 'ejs');
-
+mongoose.Promise = global.Promise;
+//mongoose.connect('mongodb://10.7.0.3:27107/data/learning');
 mongoose.connect('mongodb://localhost/learning');
 
 var Schema = mongoose.Schema;
 
 // create a schema
-var userSchema = new Schema({
+/*var userSchema = new Schema({
     name: String,
     contact : Number,
     address :String
 });
 
-var User = mongoose.model('User', userSchema);
+userSchema.methods.salary = function (value) {
+  this.value = value;
+};
 
+var User = mongoose.model('User', userSchema);
+*/
 var employeeDetails = new Schema({
-    ID: Number,
+    empnumber: Number,
     name: String,
     contact: Number,
     department: String
 });
 
 var EmployeeData = mongoose.model('EmployeeData', employeeDetails);
-
-
 
 newRouter = express.Router();
 
@@ -61,7 +64,7 @@ newApp.get('/', function (req, res) {
         });
 });
 
-newApp.post('/sendData', function (req, res) {
+/*newApp.post('/sendData', function (req, res) {
 
 
     var chris = new User({
@@ -78,6 +81,21 @@ newApp.post('/sendData', function (req, res) {
     });
 
     res.render('pages/dataReceive', chris);
+});*/
+
+newApp.post('/employeeData', function (req, res) {
+   var employee = new EmployeeData({
+       empnumber: req.body.empnumber,
+       name: req.body.name,
+       contact: req.body.contact,
+       department: req.body.department
+   });
+
+    employee.save(function (err) {
+        if(err) throw err;
+        console.log('Employee Details submit successfully');
+    });
+    res.render('pages/dataReceive', employee);
 });
 //about page
 
