@@ -13,6 +13,7 @@ mongoose.connect('mongodb://localhost/learning');
 
 var Schema = mongoose.Schema;
 
+
 // create a schema
 /*var userSchema = new Schema({
     name: String,
@@ -24,8 +25,8 @@ userSchema.methods.salary = function (value) {
   this.value = value;
 };
 
-var User = mongoose.model('User', userSchema);
-*/
+var User = mongoose.model('User', userSchema);*/
+
 var employeeDetails = new Schema({
     empnumber: Number,
     name: String,
@@ -64,6 +65,13 @@ newApp.get('/', function (req, res) {
         });
 });
 
+newApp.get('/dataReceive', function (req, res) {
+    EmployeeData.find({}, function(err, users) {
+        if (err) throw err;
+
+
+    res.render('pages/DataResult', {XYZ:users});
+});});
 /*newApp.post('/sendData', function (req, res) {
 
 
