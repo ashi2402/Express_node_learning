@@ -66,7 +66,7 @@ newApp.get('/', function (req, res) {
 });
 
 newApp.get('/dataReceive', function (req, res) {
-    EmployeeData.find({}, function(err, users) {
+    EmployeeData.find({name: 'ashish1', empnumber:566}, function(err, users) {
         if (err) throw err;
 
 
