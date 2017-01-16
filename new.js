@@ -36,8 +36,22 @@ newApp.get('/', function (req, res) {
         });
 });
 
+<<<<<<< Updated upstream
 newApp.post('/sendData', function (req, res) {
     var person = {
+=======
+newApp.get('/dataReceive', function (req, res) {
+    EmployeeData.find({}, function(err, users) {
+        if (err) throw err;
+
+
+    res.render('pages/DataResult', {XYZ:users});
+});});
+/*newApp.post('/sendData', function (req, res) {
+
+
+    var chris = new User({
+>>>>>>> Stashed changes
         name: req.body.name,
         contact: req.body.contact,
         address: req.body.address
