@@ -13,22 +13,8 @@ mongoose.connect('mongodb://localhost/learning');
 
 var Schema = mongoose.Schema;
 
-
-// create a schema
-/*var userSchema = new Schema({
-    name: String,
-    contact : Number,
-    address :String
-});
-
-userSchema.methods.salary = function (value) {
-  this.value = value;
-};
-
-var User = mongoose.model('User', userSchema);*/
-
 var employeeDetails = new Schema({
-    empnumber: Number,
+    empnumber: {type: Number, unique: true },
     name: String,
     contact: Number,
     department: String
@@ -65,31 +51,52 @@ newApp.get('/', function (req, res) {
         });
 });
 
+newApp.get('/contact', function (req, res) {
+    res.redirect('/contact')
+});
+
 newApp.get('/dataReceive', function (req, res) {
     EmployeeData.find({}, function(err, users) {
         if (err) throw err;
 
+        res.render('pages/DataResult', {XYZ:users});
+});
+});
 
-    res.render('pages/DataResult', {XYZ:users});
-});});
-/*newApp.post('/sendData', function (req, res) {
+newApp.get('/personDetails/:empID', function (req, res) {
+    var personId = req.params.empID;
+    EmployeeData.find({empnumber:personId}, function (err, users) {
+        if(err) throw err;
 
+        res.render('pages/personDetails', {user :users})
+    })
+});
 
-    var chris = new User({
-        name: req.body.name,
-        contact : req.body.contact,
-        address :req.body.address,
-        email : 'abc@gmail.com'
+newApp.get('/EditForm/:empID', function (req, res) {
+    var personaldetail = req.params.empID;
+    EmployeeData.find({empnumber: personaldetail}, function (err, details) {
+        if(err) throw err;
+
+        res.render('pages/EditForm', {detail: details})
+    })
+});
+
+newApp.post('/updateData', function (req, res) {
+    var personId = req.body.empnumber;
+    EmployeeData.findOne({empnumber: personId}, function (err, updateUser) {
+        updateUser.name = req.body.name;
+        updateUser.contact  = req.body.contact;
+        updateUser.department = req.body.department;
+
+        updateUser.save(function (err, data) {
+            if(err) throw err;
+            res.redirect('/dataReceive')
+        })
+
     });
 
-    chris.save(function(err) {
-        if (err) throw err;
-
-        console.log('User saved successfully!');
     });
 
-    res.render('pages/dataReceive', chris);
-});*/
 
 newApp.post('/employeeData', function (req, res) {
    var employee = new EmployeeData({
@@ -100,10 +107,15 @@ newApp.post('/employeeData', function (req, res) {
    });
 
     employee.save(function (err) {
-        if(err) throw err;
-        console.log('Employee Details submit successfully');
+        if(err)
+            res.send("This ID has Already Exist");
+        else {
+            console.log('Employee Details submit successfully');
+            res.redirect('/contact')
+        }
+
     });
-    res.render('pages/dataReceive', employee);
+
 });
 //about page
 
