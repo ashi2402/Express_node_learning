@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.delete').click(function (event) {
+                var empNumber = $(this).attr('data-id');
+                var parTr = $(this).closest('tr')
+                $.ajax({
+                    type: 'delete',
+                    url: '/delete/'+ empNumber
+                }).done(function (result, response, value) {
+                    if(result.success){
+                      parTr.remove();
+                    }
+                    alert(result.text)
+                }).fail(function (err) {
+                    alert(err);
+                })
+                event.preventDefault();
+            })
+        })
+     /*  $(document).ready(function () {
+           $(".removeData").click(function (event) {
+               var empNumner = $(this).parent().attr('data-id');
+               var targetEle = $(this);
+               $.ajax({
+                   type: 'delete',
+                   url: '/delete/' + targetEle,
+               }).done(function (result) {
+
+                   if(result.success) {
+                       alert("Record removed successfully");
+                       empNumner.remove();
+                   }else {
+                       alert("Problem occurred in deletion")
+                   }
+               }).fail(function (err) {
+                   alert(err);
+               });
+               event.preventDefault();
+           });
+       });
+*/
+    </script>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+<body>
+<section>
+    <table class="table table=bordered table-hover" style="width: 100%; border: 1px solid black; border-radius: 5px; text-align: center">
+        <thead >
+        <tr class="dataHeader">
+            <th style="text-align: center">ID</th>
+            <th style="text-align: center">Name</th>
+            <th style="text-align: center">View</th>
+            <th style="text-align: center">Edit</th>
+            <th style="text-align: center">Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% XYZ.forEach(function(X) { %>
+        <tr class="data" >
+            <td ><%= X.empnumber %></td>
+            <td><%= X.name %></td>
+            <td><a href="/personDetails/<%= X.empnumber%>"><button class="btn btn-info">View Details</button></a></td>
+            <td><a href="/EditForm/<%= X.empnumber%>"><button class="btn btn-success">Edit</button></a></td>
+            <td><button data-id="<%=X.empnumber%>"  class="btn btn-danger delete">Remove</button></td>
+        </tr> <% }); %>
+        </tbody>
+    </table>
+    <a href="/contact"><button class="btn btn-info">Back</button></a>
+</section>
+</body>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>
+
+
