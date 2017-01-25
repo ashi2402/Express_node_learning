@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+<body>
+<table class="table table=bordered table-hover" style="width: 100%; border: 1px solid black; border-radius: 5px; text-align: center">
+    <thead >
+    <tr>
+        <th style="text-align: center">ID</th>
+        <th style="text-align: center">Name</th>
+        <th style="text-align: center">Contact</th>
+        <th style="text-align: center">Department</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% user.forEach(function(person) { %>
+    <tr>
+        <td ><%= person.empnumber %></td>
+        <td><%= person.name %></td>
+        <td><%= person.contact %></td>
+        <td><%= person.department %></td>
+    </tr> <% }); %>
+    </tbody>
+</table>
+    <a href="/dataReceive"><button class="btn btn-info">Back</button></a>
+</section>
+</body>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>

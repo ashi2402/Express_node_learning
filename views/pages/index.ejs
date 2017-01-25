@@ -5,17 +5,20 @@
         <header><% include ../partials/header%></header>
         <main>
             <div class="jumbotron">
-                <h1>This is great</h1>
-                <p>Welcome to templating EJS</p>
-                <h2>Variable</h2>
-                <p><%= tagline %>
-                <h2>Loop</h2>
-                <ul>
-                    <% drinks.forEach(function (drink) {
-                        %> <li><%= drink.name %> - <% drink.drunkness %></li>
-                     <%   });%>
-                    %>
-                </ul>
+                <h3>Login</h3>
+                <form id="registerForm" action="/login" method="POST" style="width:25%">
+                    <div id="name-group" class="form-group">
+                        <label for="username">User Name</label>
+                        <input type="text" class="form-control" name="username" placeholder="Henry12356">
+                    </div>
+
+                    <div id="name-group" class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" name="password" placeholder="Henry123">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</span></button>
+                </form>
+
             </div>
         </main>
         <footer><% include ../partials/footer%></footer>

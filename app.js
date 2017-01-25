@@ -1,6 +1,6 @@
 var express = require('express');
 
-var app = express();
+/*var app = express();
 
 var port = 5000;
 
@@ -27,3 +27,4 @@ app.use('/', myRouter);
 
 app.listen(5000);
 
+*/

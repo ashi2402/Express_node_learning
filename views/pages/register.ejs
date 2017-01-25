@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> <!-- load jquery via CDN -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#registerForm').submit(function (event) {
+                $('.btn-success').prop('disabled', true);
+                var formData = {
+                    'username' : $('input[name=username]').val(),
+                    'email': $('input[name=email]').val(),
+                    'password': $('input[name=password]').val()
+                };
+                $.ajax({
+                    type: 'post',
+                    url : '/register',
+                    data: formData,
+                    dataType : 'json'
+                    //encode: true
+
+                }).done(function (data) {
+                    if(data.success) {
+                        alert("user created successfully");
+                    }else {
+                        alert('Problem occurred in creating user');
+                    }
+                    console.log(data);
+                })
+                event.preventDefault();
+            });
+
+
+        })
+    </script>
+</head>
+<body>
+<header>
+    <% include ../partials/header %>
+</header>
+
+<div>
+
+    <h1>Processing an AJAX Form</h1>
+
+    <!-- OUR FORM -->
+    <form id="registerForm" method="POST" style="width:25%">
+
+        <!--Username -->
+        <div id="name-group" class="form-group">
+            <label for="username">User Name</label>
+            <input type="text" class="form-control" name="username" placeholder="Henry12356">
+        </div>
+
+      <div id="name-group" class="form-group">
+            <label for="password">Name</label>
+            <input type="text" class="form-control" name="password" placeholder="Henry123">
+        </div>
+
+        <!-- EMAIL -->
+        <div id="name-group" class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" placeholder="rudd@avengers.com">
+            <!-- errors will go here -->
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit <span class="fa fa-arrow-right"></span></button>
+
+    </form>
+
+</div>
+<hr>
+<div id="myDiv">
+
+</div>
+<footer>
+    <% include ../partials/footer %>
+</footer>
+</body>
+</html>

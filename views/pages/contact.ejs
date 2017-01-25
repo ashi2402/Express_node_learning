@@ -7,9 +7,20 @@
 
 <header>
     <% include ../partials/header %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#button').click(function (event) {
+                $('#paste').load('./login', function (xy) {
+
+                });
+                event.preventDefault();
+            })
+        })
+    </script>
 </header>
 <body>
 <section>
+
     <form action="/sendData" method="post" class="form" id="data-send">
         <label>Name:</label>
         <input type="text" placeholder="name" name="name"><br><br>
@@ -20,8 +31,11 @@
         <button type="reset">Reset</button><br><br>
         <button type="submit" value="submit">Submit</button>
     </form>
+
 </section>
-</body>
+<hr>
+<button class="btn btn-info" id="button">Sign Up!</button>
+<div id="paste"></div>
 
 <footer>
     <% include ../partials/footer %>

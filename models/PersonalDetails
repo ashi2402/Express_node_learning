@@ -1,0 +1,28 @@
+var mongoose = require('../config/db');
+
+var Schema = mongoose.Schema;
+
+var personalDetailsSchema = new Schema({
+    name: String,
+    email: String,
+    contact: Number,
+    userid: String,
+    password: String
+},{collection : 'PersonalDetails'});
+
+var PersonalDetails = mongoose.model('PersonalDetails', personalDetailsSchema);
+
+module.exports = PersonalDetails;
+
+
+
+
+
+
+
+
+
+
+
+
+
